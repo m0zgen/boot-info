@@ -1,5 +1,3 @@
-![Boot info work result](http://forum.sys-admin.kz/index.php?action=dlattach;topic=4334.0;attach=2116 "Boot info work result")
-
 # Boot info
 Add system data to ssh screen after ssh login
 
