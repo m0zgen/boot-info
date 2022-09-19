@@ -13,8 +13,7 @@ SERVER_IP=`hostname -I`
 EXTERNAL_IP=`curl -s ifconfig.co`
 KERNEL=`uname -r`
 ACTIVE_USERS=`w | cut -d ' ' -f1 | grep -v USER | xargs -n1`
-TOTALMEM=`free -m | awk '$1=="Mem:" {print $2}'`
-MEMUSAGE=`free -m | awk 'NR==2{printf "Memory Usage: %s/%sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'`
+TOTALMEM=`free -m | grep "Mem" | awk '{print "Total: " $2 " Free: " $4}'`
 LAST_REBOOT=`who -b | awk '{print $3,$4,$5}'`
 SERVER_UPTIME=`awk '{a=$1/86400;b=($1%86400)/3600;c=($1%3600)/60} {printf("%d days, %d hour %d min\n",a,b,c)}' /proc/uptime`
 MOOUNT_INFO=`mount|egrep -iw "ext4|ext3|xfs|gfs|gfs2|btrfs"|grep -v "loop"|sort -u -t' ' -k1,2`
@@ -115,7 +114,6 @@ echo "Distr: " ${green}${DISTRO}${reset} >> /root/myinfo.txt
 echo -e "\n${red}Info:${reset}" >> /root/myinfo.txt
 echo CPU: ${CPUS}" CPU(s) detected "${CPUCNTMETHOD}": ${SPEED}MHz with Cache: ${CACHE}" >> /root/myinfo.txt
 echo Total mem: ${TOTALMEM}"Mb of RAM" >> /root/myinfo.txt
-echo Mem usage: ${MEMUSAGE}"Mb of RAM" >> /root/myinfo.txt
 echo Swap: ${TOTALSWAP}"Mb" >> /root/myinfo.txt
 echo Swap usage: ${USAGESWAP}"Mb of RAM" >> /root/myinfo.txt
 echo Last reboot: ${LAST_REBOOT} >> /root/myinfo.txt
