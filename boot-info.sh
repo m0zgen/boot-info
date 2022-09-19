@@ -106,22 +106,24 @@ get_status() {
 
 }
 
+checkDistro
+
 # Write the /root/myinfo.txt file
 echo -e "\n${blue}${AUTHOR}${reset}\n" > /root/myinfo.txt
 echo "Computer name: " ${green}$HOSTNAME${reset} >> /root/myinfo.txt
-echo "Release: " ${green}${DISTRO}${reset} >> /root/myinfo.txt
+echo "Distr: " ${green}${DISTRO}${reset} >> /root/myinfo.txt
 echo -e "\n${red}Info:${reset}" >> /root/myinfo.txt
-echo ${CPUS}" CPU(s) detected "${CPUCNTMETHOD}": ${SPEED}MHz with Cache: ${CACHE}" >> /root/myinfo.txt
-echo ${MEM}"Mb of RAM" >> /root/myinfo.txt
-for net in `ifconfig | grep ^[a-z] | grep -v ^lo | awk '{ print $1}' | sed 's/.$//' | uniq` ; do
-   for (( i=0; $i<16; i=$i+1 )) ; do
-      if [[ `$ifconfig | grep -c $net$i` != "0" ]] ; then
-         $ifconfig $net$i | grep $net | awk '{ printf "%s %s %s", $1, "  MAC addr:", $5 }' >> /root/myinfo.txt
-         $ifconfig $net$i | grep "inet addr" | awk '{ print "  IP " $2 }' >> /root/myinfo.txt
-      fi
-   done
-done
-#echo -e "\nIfocnfig info:\n${IFCONFIG}\n" >> /root/myinfo.txt
+echo CPU: ${CPUS}" CPU(s) detected "${CPUCNTMETHOD}": ${SPEED}MHz with Cache: ${CACHE}" >> /root/myinfo.txt
+echo Total mem: ${TOTALMEM}"Mb of RAM" >> /root/myinfo.txt
+echo Mem usage: ${MEMUSAGE}"Mb of RAM" >> /root/myinfo.txt
+echo Swap: ${TOTALSWAP}"Mb" >> /root/myinfo.txt
+echo Swap usage: ${USAGESWAP}"Mb of RAM" >> /root/myinfo.txt
+echo Last reboot: ${LAST_REBOOT} >> /root/myinfo.txt
+echo Uptime: ${SERVER_UPTIME} >> /root/myinfo.txt
+echo Active users: ${ACTIVE_USERS} >> /root/myinfo.txt
+echo IP: ${SERVER_IP} >> /root/myinfo.txt
+echo External IP: ${EXTERNAL_IP} >> /root/myinfo.txt
+echo 
 echo " " >> /root/myinfo.txt
 
 cat /root/myinfo.txt > /etc/motd
