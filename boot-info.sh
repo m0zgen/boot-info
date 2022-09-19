@@ -112,15 +112,13 @@ echo "Computer name: " ${green}$HOSTNAME${reset} >> /root/myinfo.txt
 echo "Distr: " ${green}${DISTRO}${reset} >> /root/myinfo.txt
 echo -e "\n${red}Info:${reset}" >> /root/myinfo.txt
 echo CPU: ${CPUS}" CPU(s) detected "${CPUCNTMETHOD}": ${SPEED}MHz with Cache: ${CACHE}" >> /root/myinfo.txt
-echo Total mem: ${TOTALMEM}"Mb of RAM" >> /root/myinfo.txt
-echo Swap: ${TOTALSWAP}"Mb" >> /root/myinfo.txt
-echo Swap usage: ${USAGESWAP}"Mb of RAM" >> /root/myinfo.txt
-echo Last reboot: ${LAST_REBOOT} >> /root/myinfo.txt
-echo Uptime: ${SERVER_UPTIME} >> /root/myinfo.txt
+echo ${TOTALMEM}"Mb" >> /root/myinfo.txt
+echo Swap total: "${TOTALSWAP}Mb Usage ${USAGESWAP}" >> /root/myinfo.txt
 echo Active users: ${ACTIVE_USERS} >> /root/myinfo.txt
 echo IP: ${SERVER_IP} >> /root/myinfo.txt
 echo External IP: ${EXTERNAL_IP} >> /root/myinfo.txt
-echo 
+echo Last reboot: ${LAST_REBOOT} >> /root/myinfo.txt
+echo Uptime: ${SERVER_UPTIME} >> /root/myinfo.txt
 echo " " >> /root/myinfo.txt
 
 cat /root/myinfo.txt > /etc/motd
