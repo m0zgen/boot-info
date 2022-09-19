@@ -23,7 +23,7 @@ CPUS=`grep -c processor /proc/cpuinfo`
 
 if free | awk '/^Swap:/ {exit !$2}'; then
     TOTALSWAP=`free -m | awk '$1=="Swap:" {print $2}'`
-    USAGESWAP=`free | awk '/Swap/{printf("%.2f%"), $3/$2*100}'`
+    USAGESWAP=`free -m | awk '$1=="Swap:" {print $3}'`
 else
     TOTALSWAP="TOTAL SWAP: swap does not exist"
     USAGESWAP="SWAP USAGE: swap not used"
