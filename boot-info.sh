@@ -29,7 +29,7 @@ else
     USAGESWAP="SWAP USAGE: swap not used"
 fi
 
-if [[ ! "$(command -v figlet)" ]]; then
+if [[ "$(command -v figlet)" ]]; then
     AUTHOR=`figlet ${HOSTNAME}`
 else
     AUTHOR=${HOSTNAME}
